@@ -1,0 +1,46 @@
+\documentclass{beamer}
+
+\usetheme{simple}
+
+\usepackage{lmodern}
+
+\title{A simple beamer theme}
+\subtitle{}
+\date{\today}
+\author{Simon Meoni}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{two columns}
+  \framesubtitle{An example of two columns}
+
+  \texttt{simple} is a minimalist Beamer theme that features
+
+  \begin{columns}
+    \column{.5\textwidth}
+      \begin{itemize}
+        \item a watermark logo in the background
+        \item slide {\bf numbers}
+        \item \emph{emph}asized and \alert{alert}ed text
+      \end{itemize}
+
+    \column{.5\textwidth}
+      \begin{block}{And of course...}
+         blocks, columns, and all Beamer power
+      \end{block}
+  \end{columns}
+  
+\end{frame}
+
+\begin{frame}{one column}
+  \framesubtitle{An example of one column}
+      \begin{itemize}
+        \item a \emph{watermark} logo in the background
+        \item slide {\bf numbers}
+        \item \emph{emph}asized and \alert{alert}ed text
+      \end{itemize}
+\end{frame}
+
+\end{document}

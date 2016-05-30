@@ -1,0 +1,159 @@
+% Copyright 2015 by Facundo Muñoz
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+
+
+\ProvidesPackage{beamerthemesimple}
+
+%\def\beamer@simplecolor{gris}
+%\DeclareOptionBeamer{color}{\beamer@simplecolor=#1}
+%\ExecuteOptionsBeamer{gris}
+%\ProcessOptionsBeamer
+
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{svg}
+\usepackage{color}
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+
+
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  showstringspaces=false,
+  commentstyle=\color{gray}\upshape
+}
+\colorlet{punct}{red!60!black}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+
+\lstdefinelanguage{XML}
+{
+  morestring=[b]",
+  morestring=[s]{>}{<},
+  morecomment=[s]{<?}{?>},
+  stringstyle=\color{black},
+  identifierstyle=\color{delim},
+  keywordstyle=\color{cyan},
+  morekeywords={xmlns,version,type}% list your attributes here
+}
+
+\lstdefinelanguage{json}{
+    basicstyle=\normalfont\ttfamily,
+    numberstyle=\scriptsize,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+
+\usetikzlibrary{arrows,shapes,trees,positioning,fadings}
+
+\input xkeyval
+
+\newcommand<>{\includeoverlaygraphics}[2][]
+{
+  \begin{tikzpicture}
+    \alt#3{\node[opacity=1] {\includegraphics[#1]{#2}};}
+          {\node[opacity=.15] {\includegraphics[#1]{#2}};}
+  \end{tikzpicture}
+}
+
+% These define macros \KV@setwatermark@hoffset that take one argument
+% which is processed by the last piece of codes into braces
+\def\@hos{}
+\def\@vos{}
+\def\@alpha{} % This one does not work. Why?
+\define@key{setwatermark}{hoffset}[\def\@hos{.}]{\def\@hos{\hspace*{#1}}}
+\define@key{setwatermark}{voffset}[\def\@vos{.}]{\def\@vos{\vspace*{#1}}}
+\define@key{setwatermark}{alpha}[\def\@alpha{0.7}]{\def\@alpha{#1}}
+
+\def\setwatermark{\@ifnextchar[\@setwatermark{\@setwatermark[]}}
+\def\@setwatermark[#1]#2{%
+  \setkeys{setwatermark}{#1}%
+  \def\@watermark{#2}
+}
+% \newcommand{\setwatermark}[1]{\def\@watermark{#1}}
+\setwatermark{}   % Empty initialization
+
+
+\mode<presentation>
+
+  % http://www.colorcombos.com/color-scheme-275.html
+  \definecolor{destacado}{HTML}{515151} % gris oscuro
+  \definecolor{alerte}{HTML}{FF5050}  % gris medio
+  \definecolor{normal}{HTML}{515151}  % gris medio
+  \definecolor{fondo}{HTML}{e6e6e6} % gris claro
+
+  \setbeamercolor{normal text}{bg=white,fg=destacado}
+  \setbeamercolor*{block title}{bg=fondo,fg=destacado}
+  \setbeamercolor*{block body}{bg=fondo,fg=normal}
+  \setbeamercolor{alerted text}{fg=alerte}
+
+  \usetheme{default}
+%  \usecolortheme[named=gris]{structure}
+  \usecolortheme[named=destacado]{structure}
+  \usefonttheme{structurebold}
+
+  % overlays semitransparentes
+  \setbeamercovered{transparent}
+
+  % incluir el contador de diapos
+  \setbeamertemplate{footline}[frame number]
+
+ % eliminar íconos de nav.
+  \setbeamertemplate{navigation symbols}{}
+
+ % change bullet style
+  \setbeamertemplate{itemize items}[circle]
+
+  % bloques
+  \setbeamertemplate{blocks}[rounded][shadow=false]
+
+  % especificación global para listas
+  %\beamerdefaultoverlayspecification{<+-| alert@+>}
+
+  % márgenes
+  \setbeamersize{text margin left=0.4cm,text margin right=0.4cm}
+
+  \setbeamertemplate{background}{
+  \parbox[c][\paperheight]{\paperwidth}{%
+    \vfill \hfill
+    \begin{tikzpicture}
+      %\node[opacity=\@alpha]  % not working. why?
+      \node[opacity=.07]
+      {
+        \@watermark
+      };
+    \end{tikzpicture}
+    \@hos
+
+    \@vos
+  }
+}
+
+\mode
+<all>
