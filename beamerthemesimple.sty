@@ -15,15 +15,15 @@
 %\ProcessOptionsBeamer
 
 \usepackage{tikz}
-\usepackage{listings}
+\usepackage{listings,lstautogobble}
 \usepackage{svg}
 \usepackage{color}
 \definecolor{gray}{rgb}{0.4,0.4,0.4}
 \definecolor{darkblue}{rgb}{0.0,0.0,0.6}
 \definecolor{cyan}{rgb}{0.0,0.6,0.6}
-
-
-
+\usepackage{adjustbox}
+\newlength\someheight
+\setlength\someheight{4cm}
 \lstset{
   basicstyle=\ttfamily,
   columns=fullflexible,
@@ -42,7 +42,8 @@
   stringstyle=\color{black},
   identifierstyle=\color{delim},
   keywordstyle=\color{cyan},
-  morekeywords={xmlns,version,type}% list your attributes here
+  morekeywords={xmlns,version,type},% list your attributes here
+  autogobble=true
 }
 
 \lstdefinelanguage{json}{
@@ -51,6 +52,7 @@
     numbersep=8pt,
     showstringspaces=false,
     breaklines=true,
+    autogobble=true,
     literate=
      *{0}{{{\color{numb}0}}}{1}
       {1}{{{\color{numb}1}}}{1}

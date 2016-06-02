@@ -31,7 +31,7 @@
          blocks, columns, and all Beamer power
       \end{block}
   \end{columns}
-  
+
 \end{frame}
 
 \begin{frame}{one column}
@@ -43,4 +43,23 @@
       \end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{lsttisting example (json and xml)}
+  \setlength\someheight{4cm}
+  \lstset{language=XML}
+  \begin{adjustbox}{width=\textwidth,height=\someheight,keepaspectratio}
+    \begin{lstlisting}
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <TEI>
+    <teiHeader>..</teiHeader>
+    <text>
+      <head>test</head><p>test test test
+      ...
+      </p>
+      ...
+    </text>
+    \end{lstlisting}
+  \end{adjustbox}
+\end{frame}
 \end{document}
